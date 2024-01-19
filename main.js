@@ -920,6 +920,19 @@ async function main() {
 
     window.addEventListener("keydown", (e) => {
         // if (document.activeElement != document.body) return;
+        // When 'F' key is pressed, increase the focal length
+        if (e.code === "KeyF") {
+            camera.fx += 10; // Adjust 10 to your desired increment value
+            camera.fy += 10; // Adjust 10 to your desired increment value
+            updateCamera();
+        }
+
+        // When 'G' key is pressed, decrease the focal length
+        if (e.code === "KeyG") {
+            camera.fx -= 10; // Adjust 10 to your desired decrement value
+            camera.fy -= 10; // Adjust 10 to your desired decrement value
+            updateCamera();
+        }
         carousel = false;
         if (!activeKeys.includes(e.code)) activeKeys.push(e.code);
         if (/\d/.test(e.key)) {
@@ -948,6 +961,13 @@ async function main() {
             camid.innerText =""
         }
     });
+    function updateCamera() {
+        // Update the projection matrix or any other relevant properties of the camera
+        // This depends on how your camera's projection matrix is calculated
+        // For example:
+        projectionMatrix = getProjectionMatrix(camera.fx, camera.fy, canvas.width, canvas.height);
+        gl.uniformMatrix4fv(u_projection, false, projectionMatrix);
+    }
     window.addEventListener("keyup", (e) => {
         activeKeys = activeKeys.filter((k) => k !== e.code);
     });
