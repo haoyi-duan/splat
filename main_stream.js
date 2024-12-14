@@ -186,9 +186,8 @@ const update_displayed_info = (camera) => {
 };
 
 function connectToServer() {
-    // socket = io.connect('http://localhost:7777/');
-    // socket = io.connect('http://10.79.12.218:7776/');
-    socket = io.connect('http://localhost:8000/');
+    socket = io.connect('http://localhost:7777/');
+    // socket = io.connect('http://localhost:8000/');
 
     socket.on('connect', () => {
         console.log("Connected to server.");
